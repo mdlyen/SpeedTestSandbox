@@ -3,21 +3,23 @@ using System.Threading;
 
 namespace SpeedTestSandbox.TestClasses
 {
-    class TestClassB : ISpeedTest
+    internal class TestClassB : ISpeedTest
     {
-        DateTime start;
-        DateTime end;
+        private DateTime _start;
+        private DateTime _end;
 
-        public TimeSpan PerformTest()
+        void ISpeedTest.PerformTest()
         {
-            start = DateTime.Now;
+            _start = DateTime.Now;
 
             // Perform the testing code.
-            Thread.Sleep(2300);
+            Thread.Sleep(2350);
 
-            end = DateTime.Now;
+            _end = DateTime.Now;
 
-            return end - start;
+            ElapsedTime = _end - _start;
         }
+
+        public TimeSpan ElapsedTime { get; private set; }
     }
 }

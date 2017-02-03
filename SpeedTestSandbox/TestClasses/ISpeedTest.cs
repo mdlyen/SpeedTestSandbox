@@ -2,8 +2,10 @@
 
 namespace SpeedTestSandbox.TestClasses
 {
-    interface ISpeedTest
+    internal interface ISpeedTest
     {
-        TimeSpan PerformTest();
+        void PerformTest();
+
+        TimeSpan ElapsedTime { get; }
     }
 }

@@ -59,7 +59,7 @@
     <Compile Include="TestClasses\ISpeedTest.cs" />
     <Compile Include="TestClasses\TestClassB.cs" />
     <Compile Include="TestClasses\TestClassA.cs" />
-    <Compile Include="WaitCursor.cs" />
+    <Compile Include="HourglassCursor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
 
 namespace SpeedTestSandbox
 {
@@ -19,23 +17,19 @@ namespace SpeedTestSandbox
         private void btnGoCancel_Click(object sender, RoutedEventArgs e)
         {
             SetFormButtons(false);
-            
+
             var a = new TestClasses.TestClassA();
             var b = new TestClasses.TestClassB();
 
             try
             {
-                using (new WaitCursor())
+                using (new HourglassCursor())
                 {
-                    var PST = new PerformSpeedTest(a, b);
+                    var pst = new PerformSpeedTest(a, b);
 
                     // Todo: Change this to a background thread so UI can update, etc.
-                    textBoxOutput.Text = PST.RunTests();
+                    TextBoxOutput.Text = pst.RunTests();
                 }
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
             }
             finally
             {
@@ -45,16 +39,9 @@ namespace SpeedTestSandbox
 
         private void SetFormButtons(bool newValue)
         {
-            if (newValue)
-            {
-                btnGoCancel.Content = "Go";
-            }
-            else
-            {
-                btnGoCancel.Content = "Cancel";
-            }
+            BtnGoCancel.Content = newValue ? "Go" : "Cancel";
 
-            btnExit.IsEnabled = newValue;
+            BtnExit.IsEnabled = newValue;
         }
     }
 }

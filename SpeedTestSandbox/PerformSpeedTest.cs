@@ -1,30 +1,29 @@
 ﻿using SpeedTestSandbox.TestClasses;
 using System.Text;
-using System.Windows.Controls;
 
 namespace SpeedTestSandbox
 {
     internal class PerformSpeedTest
     {
-        ISpeedTest _AClass;
-        ISpeedTest _BClass;
+        internal readonly ISpeedTest AClass;
+        internal readonly ISpeedTest BClass;
 
-        public PerformSpeedTest(TestClasses.ISpeedTest AClass, TestClasses.ISpeedTest BClass)
+        public PerformSpeedTest(TestClasses.ISpeedTest aClass, TestClasses.ISpeedTest bClass)
         {
-            _AClass = AClass;
-            _BClass = BClass;
+            AClass = aClass;
+            BClass = bClass;
         }
 
         public string RunTests()
         {
-            var a = _AClass.PerformTest();
-            var b = _BClass.PerformTest();
+            AClass.PerformTest();
+            BClass.PerformTest();
 
-            var SB = new StringBuilder();
-            SB.AppendLine($"Class A: {a}");
-            SB.AppendLine($"Class B: {b}");
+            var sb = new StringBuilder();
+            sb.AppendLine($"Class A: {AClass.ElapsedTime}");
+            sb.AppendLine($"Class B: {BClass.ElapsedTime}");
 
-            return SB.ToString();
+            return sb.ToString();
         }
     }
 }

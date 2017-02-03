@@ -3,11 +3,11 @@ using System.Windows.Input;
 
 namespace SpeedTestSandbox
 {
-    public class WaitCursor : IDisposable
+    public class HourglassCursor : IDisposable
     {
-        private Cursor _oldCursor;
+        private readonly Cursor _oldCursor;
 
-        public WaitCursor()
+        public HourglassCursor()
         {
             _oldCursor = Mouse.OverrideCursor;
             Mouse.OverrideCursor = Cursors.Wait;
