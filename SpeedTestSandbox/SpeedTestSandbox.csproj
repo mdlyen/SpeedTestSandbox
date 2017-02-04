@@ -55,11 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PerformSpeedTest.cs" />
-    <Compile Include="TestClasses\ISpeedTest.cs" />
+    <Compile Include="SandBoxClasses\PerformSpeedTest.cs" />
+    <Compile Include="SandBoxClasses\ISpeedTest.cs" />
     <Compile Include="TestClasses\TestClassB.cs" />
     <Compile Include="TestClasses\TestClassA.cs" />
-    <Compile Include="HourglassCursor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

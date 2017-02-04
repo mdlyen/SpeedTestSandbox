@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpeedTestSandbox.TestClasses
+namespace SpeedTestSandbox.SandBoxClasses
 {
     internal interface ISpeedTest
     {
