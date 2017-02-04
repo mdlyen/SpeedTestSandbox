@@ -5,12 +5,12 @@ using SpeedTestSandbox.SandBoxClasses;
 
 namespace SpeedTestSandbox
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private PerformSpeedTest _performSpeedTest;
         private Cursor _oldCursor;
         private BackgroundWorker _backgroundWorker;
-        private bool _isRunning = false;
+        private bool _isRunning;
 
         public MainWindow()
         {
@@ -34,10 +34,8 @@ namespace SpeedTestSandbox
             {
                 SetFormButtons(false);
 
-                // Spin up the test classes and the SpeedTest harness.
-                var a = new TestClasses.TestClassA();
-                var b = new TestClasses.TestClassB();
-                _performSpeedTest = new PerformSpeedTest(a, b);
+                // Spin up the SpeedTest harness.
+                _performSpeedTest = new PerformSpeedTest();
 
                 // Set up the background process.
                 _backgroundWorker = new BackgroundWorker();
@@ -63,6 +61,7 @@ namespace SpeedTestSandbox
 
         private void SetFormButtons(bool isIdle)
         {
+            //TODO: Split this button into separate Go and Cancel buttons for better UX.
             BtnGoCancel.Content = isIdle ? "Go" : "Cancel";
             BtnExit.IsEnabled = isIdle;
 

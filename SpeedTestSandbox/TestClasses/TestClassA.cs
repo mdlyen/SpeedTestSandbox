@@ -1,26 +1,29 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Threading;
 using SpeedTestSandbox.SandBoxClasses;
 
 namespace SpeedTestSandbox.TestClasses
 {
-    internal class TestClassA : ISpeedTest
+    [SpeedTestClass]
+    public class TestClassA : ISpeedTest
     {
-        private DateTime _start;
-        private DateTime _end;
+        private const int Iterations = 1453;
+
+        public long ElapsedTime { get; private set; }
+
+        //TODO: Figure out a better way to get a short name of the class for display purposes.
+        public string ClassName { get; } = "Temp Class A";
 
         void ISpeedTest.PerformTest()
         {
-            _start = DateTime.Now;
+            var sw = new Stopwatch();
 
             // Perform the testing code.
-            Thread.Sleep(1500);
+            sw.Start();
+            Thread.Sleep(Iterations);
+            sw.Stop();
 
-            _end = DateTime.Now;
-
-            ElapsedTime = _end - _start;
+            ElapsedTime = sw.ElapsedMilliseconds;
         }
-
-        public TimeSpan ElapsedTime { get; private set; }
     }
 }

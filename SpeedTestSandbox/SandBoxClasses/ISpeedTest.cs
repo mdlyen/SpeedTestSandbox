@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace SpeedTestSandbox.SandBoxClasses
+﻿namespace SpeedTestSandbox.SandBoxClasses
 {
-    internal interface ISpeedTest
+    public interface ISpeedTest
     {
         void PerformTest();
-
-        TimeSpan ElapsedTime { get; }
+        long ElapsedTime { get; }
+        string ClassName { get; }
     }
 }

@@ -1,50 +1,37 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Text;
 
 namespace SpeedTestSandbox.SandBoxClasses
 {
-    internal class PerformSpeedTest
+    public class PerformSpeedTest
     {
-        internal readonly ISpeedTest AClass;
-        internal readonly ISpeedTest BClass;
-        internal string TextOutput;
-        private StringBuilder _stringBuilder;
-
-        public PerformSpeedTest(ISpeedTest aClass, ISpeedTest bClass)
-        {
-            AClass = aClass;
-            BClass = bClass;
-        }
-
-        public bool RequestCancel { get; internal set; }
+        public string TextOutput;
+        public bool RequestCancel { get; set; }
 
         public void RunTests(BackgroundWorker backgroundWorker)
         {
-            AClass.PerformTest();
-            if (backgroundWorker.CancellationPending)
+            var sb = new StringBuilder();
+            var types = SpeedTestAttributeUtility.GetTestClasses();
+
+            foreach (var testClass in types)
             {
-                CancelOperationExit();
-                return;
+                var testInstance = Activator.CreateInstance(testClass) as ISpeedTest;
+                if (testInstance == null) continue;
+
+                testInstance.PerformTest();
+
+                if (backgroundWorker.CancellationPending)
+                {
+                    TextOutput = "Operation cancelled...";
+                    return;
+                }
+
+                //TODO: Add additional statistical elements for analysis.
+                sb.AppendFormat("{0}: {1}\n", testInstance.ClassName, testInstance.ElapsedTime);
             }
-            BClass.PerformTest();
-            if (backgroundWorker.CancellationPending)
-            {
-                CancelOperationExit();
-                return;
-            }
 
-            _stringBuilder = new StringBuilder();
-            _stringBuilder.AppendLine($"Class A: {AClass.ElapsedTime}");
-            _stringBuilder.AppendLine($"Class B: {BClass.ElapsedTime}");
-
-            TextOutput = _stringBuilder.ToString();
-        }
-
-        private void CancelOperationExit()
-        {
-            TextOutput = "Operation cancelled...";
+            TextOutput = sb.ToString();
         }
     }
 }
