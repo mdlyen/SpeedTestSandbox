@@ -4,22 +4,22 @@ using System.Linq;
 
 namespace SpeedTestSandbox.SandBoxClasses
 {
-    public class SpeedTestClassAttribute : Attribute
-    {
-    }
-
-    public static class SpeedTestAttributeUtility
+    public static class SpeedTestInterfaceUtility
     {
         public static IList<Type> GetTestClasses()
         {
-            //TODO: Pull types by Interface instead of assigning an attribute.
             var returnList = new List<Type>();
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             foreach (var a in assemblies)
             {
-                returnList.AddRange(a.GetTypes().Where(type => type.GetCustomAttributes(typeof(SpeedTestClassAttribute), true).Length > 0));
+                var testInterface = typeof(ISpeedTest);
+                var assemblytypes = a.GetTypes();
+
+                // Pull classes that implement the ISpeedTest interface.
+                var t = assemblytypes.Where(x => testInterface.IsAssignableFrom(x) && x.IsClass);
+                returnList.AddRange(t);
             }
 
             return returnList;

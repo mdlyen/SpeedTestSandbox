@@ -4,18 +4,18 @@ using SpeedTestSandbox.SandBoxClasses;
 
 namespace SpeedTestSandbox.TestClasses
 {
-    [SpeedTestClass]
     public class TestClassA : ISpeedTest
     {
         private const int Iterations = 1453;
 
         public long ElapsedTime { get; private set; }
 
-        //TODO: Figure out a better way to get a short name of the class for display purposes.
-        public string ClassName { get; } = "Temp Class A";
+        public string ClassName { get; private set; }
 
         void ISpeedTest.PerformTest()
         {
+            ClassName = GetType().Name;
+            
             var sw = new Stopwatch();
 
             // Perform the testing code.

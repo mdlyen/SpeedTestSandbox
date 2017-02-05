@@ -12,7 +12,7 @@ namespace SpeedTestSandbox.SandBoxClasses
         public void RunTests(BackgroundWorker backgroundWorker)
         {
             var sb = new StringBuilder();
-            var types = SpeedTestAttributeUtility.GetTestClasses();
+            var types = SpeedTestInterfaceUtility.GetTestClasses();
 
             foreach (var testClass in types)
             {
