@@ -58,6 +58,7 @@
     <Compile Include="SandBoxClasses\PerformSpeedTest.cs" />
     <Compile Include="SandBoxClasses\ISpeedTest.cs" />
     <Compile Include="SandBoxClasses\SpeedTestInterfaceUtility.cs" />
+    <Compile Include="TestClasses\IterationBase.cs" />
     <Compile Include="TestClasses\StringBuilderAppend.cs" />
     <Compile Include="TestClasses\StringAppend.cs" />
     <Page Include="MainWindow.xaml">
