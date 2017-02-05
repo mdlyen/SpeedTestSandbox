@@ -26,8 +26,11 @@ namespace SpeedTestSandbox.SandBoxClasses
                     break;
                 }
 
-                //TODO: Add additional statistical elements for analysis.
-                sb.AppendFormat("{0}: {1}\n", testInstance.ClassName, testInstance.ElapsedTime);
+                var et = testInstance.ElapsedTime;
+                var it = testInstance.Iterations;
+                var msPerIt = (double)et / (double)it;
+
+                sb.AppendFormat("{0}: {1}ms, {2:0.00000}ms per Iteration\n", testInstance.ClassName, testInstance.ElapsedTime, msPerIt);
             }
 
             TextOutput = sb.ToString();

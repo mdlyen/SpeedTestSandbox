@@ -58,8 +58,8 @@
     <Compile Include="SandBoxClasses\PerformSpeedTest.cs" />
     <Compile Include="SandBoxClasses\ISpeedTest.cs" />
     <Compile Include="SandBoxClasses\SpeedTestInterfaceUtility.cs" />
-    <Compile Include="TestClasses\TestClassB.cs" />
-    <Compile Include="TestClasses\TestClassA.cs" />
+    <Compile Include="TestClasses\StringBuilderAppend.cs" />
+    <Compile Include="TestClasses\StringAppend.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

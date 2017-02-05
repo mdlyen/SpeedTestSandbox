@@ -5,5 +5,6 @@
         void PerformTest();
         long ElapsedTime { get; }
         string ClassName { get; }
+        int Iterations { get; }
     }
 }

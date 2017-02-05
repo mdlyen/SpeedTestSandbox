@@ -1,26 +1,35 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using SpeedTestSandbox.SandBoxClasses;
 
 namespace SpeedTestSandbox.TestClasses
 {
-    public class TestClassA : ISpeedTest
+    public class StringAppend : ISpeedTest
     {
-        private const int Iterations = 1453;
-
         public long ElapsedTime { get; private set; }
-
         public string ClassName { get; private set; }
+        public int Iterations => 150000;
 
         void ISpeedTest.PerformTest()
         {
             ClassName = GetType().Name;
-            
+
+            // Create stopwatch.
             var sw = new Stopwatch();
 
-            // Perform the testing code.
+            // Start the stopwatch.
             sw.Start();
-            Thread.Sleep(Iterations);
+
+            // Perform the testing code.
+            var resultString = "";
+
+            for (var i = 0; i < Iterations; i++)
+            {
+                resultString += i.ToString();
+            }
+
+            // Stop the stopwatch.
             sw.Stop();
 
             ElapsedTime = sw.ElapsedMilliseconds;
