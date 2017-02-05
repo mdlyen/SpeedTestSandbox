@@ -9,6 +9,7 @@
         <TextBlock x:Name="TextTitle" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Speed Test" VerticalAlignment="Top" FontFamily="Verdana" FontWeight="Bold" FontSize="24" />
         <TextBox x:Name="TextBoxOutput" Margin="20,44,20,40" TextWrapping="Wrap" FontFamily="Verdana" FontSize="18" />
         <Button x:Name="BtnExit" Content="Exit" HorizontalAlignment="Right" Margin="0,0,25,15" VerticalAlignment="Bottom" Width="75" FontFamily="Verdana" Click="btnExit_Click" />
-        <Button x:Name="BtnGoCancel" Content="Go" HorizontalAlignment="Left" Margin="25,0,0,15" VerticalAlignment="Bottom" Width="75" Click="btnGoCancel_Click" FontFamily="Verdana" IsDefault="True"/>
+        <Button x:Name="BtnGo" Content="Go" HorizontalAlignment="Left" Margin="25,0,0,15" VerticalAlignment="Bottom" Width="75" Click="btnGo_Click" FontFamily="Verdana" IsDefault="True"/>
+        <Button x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="105,0,0,15" VerticalAlignment="Bottom" Width="75" Click="btnCancel_Click" IsEnabled="False" FontFamily="Verdana" IsDefault="True"/>
     </Grid>
 </Window>

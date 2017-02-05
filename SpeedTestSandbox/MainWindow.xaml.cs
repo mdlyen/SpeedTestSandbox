@@ -10,7 +10,7 @@ namespace SpeedTestSandbox
         private PerformSpeedTest _performSpeedTest;
         private Cursor _oldCursor;
         private BackgroundWorker _backgroundWorker;
-        private bool _isRunning;
+        private bool _isCancelled;
 
         public MainWindow()
         {
@@ -22,35 +22,36 @@ namespace SpeedTestSandbox
             Close();
         }
 
-        private void btnGoCancel_Click(object sender, RoutedEventArgs e)
+        private void btnGo_Click(object sender, RoutedEventArgs e)
         {
-            if (_isRunning)
-            {
-                if (_backgroundWorker.IsBusy) _backgroundWorker.CancelAsync();
-                TextBoxOutput.Text = _performSpeedTest.TextOutput;
-                SetFormButtons(true);
-            }
-            else
-            {
-                SetFormButtons(false);
+            SetFormButtons(false);
 
-                // Spin up the SpeedTest harness.
-                _performSpeedTest = new PerformSpeedTest();
+            // Spin up the SpeedTest harness.
+            _performSpeedTest = new PerformSpeedTest();
 
-                // Set up the background process.
-                _backgroundWorker = new BackgroundWorker();
-                _backgroundWorker.RunWorkerCompleted += WorkerCompleted;
-                _backgroundWorker.DoWork += PerformTests;
-                _backgroundWorker.WorkerSupportsCancellation = true;
+            // Set up the background process.
+            _backgroundWorker = new BackgroundWorker();
+            _backgroundWorker.RunWorkerCompleted += WorkerCompleted;
+            _backgroundWorker.DoWork += PerformTests;
+            _backgroundWorker.WorkerSupportsCancellation = true;
 
-                // Start the background process.
-                _backgroundWorker.RunWorkerAsync();
-            }
+            // Start the background process.
+            _backgroundWorker.RunWorkerAsync();
+            _isCancelled = false;
+            TextBoxOutput.Text = "Performing tests...";
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (_backgroundWorker.IsBusy) _backgroundWorker.CancelAsync();
+
+            TextBoxOutput.Text = "Operation pending...";
+            _isCancelled = true;
         }
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            TextBoxOutput.Text = _performSpeedTest.TextOutput;
+            TextBoxOutput.Text = _isCancelled ? "Operation cancelled..." : _performSpeedTest.TextOutput;
             SetFormButtons(true);
         }
 
@@ -61,18 +62,16 @@ namespace SpeedTestSandbox
 
         private void SetFormButtons(bool isIdle)
         {
-            //TODO: Split this button into separate Go and Cancel buttons for better UX.
-            BtnGoCancel.Content = isIdle ? "Go" : "Cancel";
+            BtnGo.IsEnabled = isIdle;
+            BtnCancel.IsEnabled = !isIdle;
             BtnExit.IsEnabled = isIdle;
 
             if (isIdle)
             {
-                _isRunning = false;
                 Mouse.OverrideCursor = _oldCursor;
             }
             else
             {
-                _isRunning = true;
                 _oldCursor = Mouse.OverrideCursor;
                 Mouse.OverrideCursor = Cursors.Wait;
             }

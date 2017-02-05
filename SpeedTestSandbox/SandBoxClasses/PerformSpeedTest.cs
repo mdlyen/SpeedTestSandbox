@@ -23,8 +23,7 @@ namespace SpeedTestSandbox.SandBoxClasses
 
                 if (backgroundWorker.CancellationPending)
                 {
-                    TextOutput = "Operation cancelled...";
-                    return;
+                    break;
                 }
 
                 //TODO: Add additional statistical elements for analysis.
