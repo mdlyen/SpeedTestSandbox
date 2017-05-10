@@ -22,11 +22,11 @@ namespace SpeedTestSandbox.TestClasses
             sw.Start();
 
             // Perform the testing code.
-            var resultString = "";
+            var nullTesting = 0;
 
             for (var i = 0; i < Iterations; i++)
             {
-                //resultString += i.ToString();
+                nullTesting = i;
             }
 
             // Stop the stopwatch.
